@@ -10,19 +10,29 @@ class Product extends Model {}
 Product.init(
   {
     id: {
-      type: DataTypes.INTERGER, NOT_NULL, AUTO_INCREMENT, PRIMARY_KEY,
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
     product_name: {
-      type: DataTypes.STRING, NOT_NULL,
+      type: DataTypes.STRING,
+      allowNull: false,
     },  
     price: {
-      type: DataTypes.DECIMAL (10,2), NOT_NULL, VALIDATE: {isDecimal: true},
+      type: DataTypes.DECIMAL (10,2),
+      allowNull: false,
+      validate: {isDecimal: true},
     },
     stock: {
-      type: DataTypes.INTERGER, NOT_NULL, DEFAULT_VALUE:(10), VALIDATE: {isNumeric: true},
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 10,
+      validate: {isNumeric: true},
     },
     category_id: {
-      type: DataTypes.INTERGER, REFERENCES: {model: 'category', key: 'id'},
+      type: DataTypes.INTEGER,
+      references: {model: 'category', key: 'id'},
     }
   },
   {

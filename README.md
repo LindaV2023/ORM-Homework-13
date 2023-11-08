@@ -41,7 +41,8 @@ THEN I am able to successfully create, update, and delete data in my database
 ## Files and Images
 
 ![Image of terminal with ecommerce_db database](image.png)
-![Alt text](image.png)
+![start server](image.png)
+[Running database and tables](image-1.png)
 
 ## Usage 
 

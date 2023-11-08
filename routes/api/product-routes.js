@@ -76,12 +76,12 @@ router.put('/:id', (req, res) => {
       id: req.params.id,
     },
   })
-    .then((product) => {
-      if (req.body.tagIds && req.body.tagIds.length) {
 
-        ProductTag.findAll({
-          where: { product_id: req.params.id }
-        }).then((productTags) => {
+    .then((product) => {
+        return ProductTag.findAll({
+          where: { product_id: req.params.id } });
+        })
+        .then((productTags) => {
           // create filtered list of new tag_ids
           const productTagIds = productTags.map(({ tag_id }) => tag_id);
           const newProductTags = req.body.tagIds
@@ -107,26 +107,20 @@ router.put('/:id', (req, res) => {
           .catch((err) => {
             // console.log(err);
             res.status(400).json(err);
-          })
+          });
       }
+      );
 
-      return res.json(product);
-    })
-    .catch((err) => {
-      // console.log(err);
-      res.status(400).json(err);
-    });
-});
-
+     
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
 try { 
-  const delProd = await Product.destroy({
+  const product = await Product.destroy({
     where: {
       id: req.params.id,
     },
   });
-  if (!delProd) {
+  if (!product) {
     res.status(404).json({ message: 'No product found with that id!' });
     return
   }
